@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import PrePrompt from "./PrePrompt";
 
 interface ChatboxProps {
-  onSubCategorySelect: React.Dispatch<React.SetStateAction<string | null>>;
+  onTagSelect: (tagId: number | null) => void;
 }
 
 const mainCategories = ["Backend", "Frontend", "Data", "Web Geliştirme"];
 const subCategories = {
-  Backend: ["Java", "Python", "Node.js", "Web Geliştirme"],
+  Backend: ["Java", "Python", "Nodejs", "Web Geliştirme"],
   Frontend: ["React", "Vue", "Angular"],
   Data: ["Data Science", "Machine Learning", "ETL"],
   "Web Geliştirme": ["HTML/CSS", "JS", "Frameworks"]
@@ -32,14 +32,19 @@ const tagIds: Record<string, number> = {
   Frameworks: 16
 };
 
-const Chatbox: React.FC<ChatboxProps> = ({ onSubCategorySelect }) => {
+const Chatbox: React.FC<ChatboxProps> = ({ onTagSelect }) => {
   const [selectedMain, setSelectedMain] = useState<string | null>(null);
   const [selectedSub, setSelectedSub] = useState<string | null>(null);
 
-  // Seçilen alt kategoriyi HomePage'e bildir
+ 
   useEffect(() => {
-    onSubCategorySelect(selectedSub);
-  }, [selectedSub, onSubCategorySelect]);
+    if (!selectedSub) {
+      onTagSelect(null);
+      return;
+    }
+    const tagId = tagIds[selectedSub];
+    onTagSelect(tagId || null);
+  }, [selectedSub, onTagSelect]);
 
   return (
     <div className="flex p-4 space-x-4">
