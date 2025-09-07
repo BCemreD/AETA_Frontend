@@ -1,13 +1,17 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useAuthStore } from "../../stores/useAuthStore";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
-  const loginStore = useAuthStore((state) => state.login);
+  const { login } = useAuthStore();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     try {
       const res = await fetch("http://localhost:8080/api/auth/login", {
         method: "POST",
@@ -15,14 +19,17 @@ const LoginForm = () => {
         body: JSON.stringify({ username, password }),
       });
 
-      if (!res.ok) throw new Error("Login failed");
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || "Giriş başarısız.");
+      }
 
       const data = await res.json();
-      loginStore(data.user, data.token);
-      alert("Login successful!");
+      login(data.token);
+      navigate("/"); // re-direct home
     } catch (err) {
+      setError((err as Error).message);
       console.error(err);
-      alert("Invalid credentials");
     }
   };
 
@@ -31,29 +38,29 @@ const LoginForm = () => {
       onSubmit={handleLogin}
       className="max-w-sm mx-auto p-6 bg-white rounded-2xl shadow-md space-y-4"
     >
-      <h2 className="text-xl font-semibold text-center">Login</h2>
-
+      <h2 className="text-xl font-semibold text-center">Giriş Yap</h2>
+      {error && <p className="text-red-500 text-sm text-center">{error}</p>}
       <input
         type="text"
-        placeholder="Username"
+        placeholder="Kullanıcı Adı"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring"
+        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-[#ffc40c] transition duration-200"
       />
 
       <input
         type="password"
-        placeholder="Password"
+        placeholder="Şifre"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring"
+        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-[#ffc40c] transition duration-200"
       />
 
       <button
         type="submit"
-        className="w-full py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        className="w-full py-2 bg-[#ffc40c] text-[#253342] font-bold rounded-lg hover:bg-[#ffbe00] transition duration-200"
       >
-        Login
+        Giriş Yap
       </button>
     </form>
   );

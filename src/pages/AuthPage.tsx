@@ -1,55 +1,47 @@
-import { useState } from "react";
-import LoginForm from "../components/user/LoginForm";
-import RegisterForm from "../components/user/RegisterForm";
-import LogoutButton from "../components/user/LogoutButton";
-import { useAuthStore } from "../stores/useAuthStore";
+import { create } from "zustand";
 
-const AuthPage = () => {
-  const { user } = useAuthStore();
-  const [mode, setMode] = useState<"login" | "register">("login");
+interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  username: string;
+}
 
-  if (user) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-        <h2 className="text-2xl font-semibold mb-4">
-          Welcome, {user.firstName} {user.lastName}!
-        </h2>
-        <LogoutButton />
-      </div>
-    );
-  }
+export interface AuthState {
+  user: User | null;
+  token: string | null;
+  setUser: (user: User | null) => void;
+  setToken: (token: string | null) => void;
+  fetchProfile: () => Promise<void>; 
+}
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <div className="w-full max-w-md">
-        {mode === "login" ? <LoginForm /> : <RegisterForm />}
+export const useAuthStore = create<AuthState>((set, get) => ({
+  user: null,
+  token: localStorage.getItem("token"),
+  setUser: (user) => set({ user }),
+  setToken: (token) => {
+    if (token) {
+      localStorage.setItem("token", token);
+    } else {
+      localStorage.removeItem("token");
+    }
+    set({ token });
+  },
+  fetchProfile: async () => {
+    const token = get().token;
+    if (!token) return;
 
-        <div className="text-center mt-4">
-          {mode === "login" ? (
-            <p>
-              Don’t have an account?{" "}
-              <button
-                onClick={() => setMode("register")}
-                className="text-blue-600 hover:underline"
-              >
-                Register
-              </button>
-            </p>
-          ) : (
-            <p>
-              Already have an account?{" "}
-              <button
-                onClick={() => setMode("login")}
-                className="text-blue-600 hover:underline"
-              >
-                Login
-              </button>
-            </p>
-          )}
-        </div>
-      </div>
-    </div>
-  );
-};
+    const res = await fetch("http://localhost:8080/api/auth/me", {
+      headers: { Authorization: `Bearer ${token}` },
+    });
 
-export default AuthPage;
+    if (res.ok) {
+      const data = await res.json();
+      set({ user: data });
+    } else {
+      set({ user: null, token: null });
+      localStorage.removeItem("token");
+    }
+  },
+}));
