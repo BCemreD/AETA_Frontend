@@ -7,11 +7,9 @@ export interface Blog {
   imageAlt: string;
   url: string;
   tags: string[];
-  createdAt: string;
-  updatedAt: string | null;
-  createdBy: string;
-  updatedBy: string | null;
+  categories: string[];
 }
+
 
 interface BlogState {
   blogs: Blog[];

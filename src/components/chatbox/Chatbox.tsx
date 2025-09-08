@@ -1,66 +1,45 @@
-import React, { useState, useEffect } from "react";
-import PrePrompt from "./PrePrompt";
+import React from "react";
+import { useSearchStore } from "../../stores/useSearchStore";
+import PrepPrompt from "./PrePrompt";
+import type { PrepPromptProps } from "./PrePrompt";
+import PromptBar from "./PromptBar";
 
-interface ChatboxProps {
-  onTagSelect: (tagId: number | null) => void;
-}
+interface ChatboxProps {}
 
-const mainCategories = ["Backend", "Frontend", "Data", "Web Geliştirme"];
-const subCategories = {
-  Backend: ["Java", "Python", "Nodejs", "Web Geliştirme"],
-  Frontend: ["React", "Vue", "Angular"],
-  Data: ["Data Science", "Machine Learning", "ETL"],
-  "Web Geliştirme": ["HTML/CSS", "JS", "Frameworks"]
-};
-
-const tagIds: Record<string, number> = {
-  Java: 1,
-  "Spring Boot": 2,
-  Frontend: 3,
-  Cloud: 4,
-  "Data Science": 5,
-  Python: 6,
-  Nodejs: 7,
-  "Web Geliştirme": 8,
-  React: 9,
-  Vue: 10,
-  Angular: 11,
-  "Machine Learning": 12,
-  ETL: 13,
-  "HTML/CSS": 14,
-  JS: 15,
-  Frameworks: 16
-};
-
-const Chatbox: React.FC<ChatboxProps> = ({ onTagSelect }) => {
-  const [selectedMain, setSelectedMain] = useState<string | null>(null);
-  const [selectedSub, setSelectedSub] = useState<string | null>(null);
+const Chatbox: React.FC<ChatboxProps> = () => {
+  const { chat, search } = useSearchStore();
 
  
-  useEffect(() => {
-    if (!selectedSub) {
-      onTagSelect(null);
-      return;
-    }
-    const tagId = tagIds[selectedSub];
-    onTagSelect(tagId || null);
-  }, [selectedSub, onTagSelect]);
+  const handleTagSelect: PrepPromptProps["onTagSelect"] = (tagId) => {
+    search("", tagId ?? undefined);
+  };
+
+  const handleSendMessage = (message: string) => {
+    search(message);
+  };
 
   return (
-    <div className="flex p-4 space-x-4">
-      <div className="w-1/4">
-        <PrePrompt
-          mainCategories={mainCategories}
-          subCategories={subCategories}
-          selectedMain={selectedMain}
-          selectedSub={selectedSub}
-          onSelectMain={setSelectedMain}
-          onSelectSub={setSelectedSub}
-        />
+    <div className="border p-4 rounded-lg h-96 flex flex-col gap-2">
+      
+      {/* Tag selection */}
+      <PrepPrompt onTagSelect={handleTagSelect} />
+
+      {/* Messages */}
+      <div className="flex-1 overflow-y-auto flex flex-col gap-2 mb-2">
+        {chat.map((msg, idx) => (
+          <div
+            key={idx}
+            className={`p-2 rounded ${
+              msg.from === "user" ? "bg-blue-100 self-end" : "bg-gray-200 self-start"
+            }`}
+          >
+            {msg.text}
+          </div>
+        ))}
       </div>
-      <div className="flex-1 overflow-y-auto">
-        <p>Bir kategori seçiniz...</p>
-      </div>
+
+      {/* Input */}
+      <PromptBar onSubmit={handleSendMessage} />
     </div>
   );
 };

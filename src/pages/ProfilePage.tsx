@@ -8,11 +8,11 @@ const ProfilePage = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate("/auth"); // login/register sayfasına yönlendir
+      navigate("/auth"); 
     }
   }, [user, navigate]);
 
-  if (!user) return null; // yönlendirme olana kadar boş döndür
+  if (!user) return null; 
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
