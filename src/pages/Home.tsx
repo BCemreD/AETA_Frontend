@@ -30,7 +30,7 @@ const HomePage: React.FC = () => {
         </div>
 
         {/* Chatbox */}
-        <div className="col-span-full lg:col-span-4 self-center space-y-6">
+        <div className="col-span-full lg:col-span-4  space-y-6">
           <PromptBar onSubmit={handleSearch} />
           <Chatbox/>
         </div>

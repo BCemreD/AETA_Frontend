@@ -1,9 +1,11 @@
 import React from "react";
 import type { Blog } from "../stores/useBlogStore";
+import ImageHolder from "./ImageHolder";
+import { getImageUrl } from "../utils/utils";
 
 interface BlogCartProps {
   blog: Blog;
-  
+
 }
 
 const BlogCart = ({ blog }: BlogCartProps) => {
@@ -18,13 +20,10 @@ const BlogCart = ({ blog }: BlogCartProps) => {
       </div>
 
       {/* Image */}
-      {blog.imageSrc && (
-        <img
-          src={blog.imageSrc}
-          alt={blog.imageAlt || "blog image"}
-          className="w-full h-48 object-cover rounded-lg mb-3"
-        />
-      )}
+      <ImageHolder
+        src={getImageUrl(blog.imageSrc)}
+        alt={blog.imageAlt || "Blog image"}
+      />
 
       {/* Footer */}
       <div className="text-sm text-gray-500 mb-2">

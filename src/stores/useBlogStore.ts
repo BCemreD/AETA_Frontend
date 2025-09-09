@@ -8,6 +8,7 @@ export interface Blog {
   url: string;
   tags: string[];
   categories: string[];
+  createdAt: string;
 }
 
 

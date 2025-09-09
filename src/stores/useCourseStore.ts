@@ -8,6 +8,7 @@ export interface Course {
   url: string;
   tags: string[];
   categories: string[];
+  createdAt: string;
 }
 
 interface CourseState {

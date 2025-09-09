@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FavoriteButton } from "./favorite/FavoriteButton";
-import { useAuthStore } from "../stores/useAuthStore"; 
+import { useAuthStore } from "../stores/useAuthStore";
 import type { Course } from "../stores/useCourseStore";
+import ImageHolder from "./ImageHolder";
+import { getImageUrl } from "../utils/utils";
 
 interface CourseCartProps {
   course: Course;
@@ -22,14 +24,13 @@ const CourseCart = ({ course }: CourseCartProps) => {
       </div>
 
       <Link to={course.url} target="_blank" rel="noopener noreferrer">
+
         {/* Image */}
-        {course.imageSrc && (
-          <img
-            src={course.imageSrc}
-            alt={course.imageAlt || "course image"}
-            className="w-full h-48 object-cover rounded-lg mb-3"
-          />
-        )}
+        <ImageHolder
+        src={getImageUrl(course.imageSrc)}
+        alt={course.imageAlt || "Course image"}
+      />
+
 
         {/* Footer */}
         <div className="text-sm text-gray-500 mb-2">

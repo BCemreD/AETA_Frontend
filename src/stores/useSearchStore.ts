@@ -1,25 +1,6 @@
 import { create } from "zustand";
-
-export interface Course {
-  id: number;
-  title: string;
-  imageSrc: string;
-  imageAlt: string;
-  url: string;
-  tags: string[];
-  categories: string[];
-}
-
-export interface Blog {
-  id: number;
-  title: string;
-  imageSrc: string;
-  imageAlt: string;
-  url: string;
-  tags: string[];
-  categories: string[]; 
-}
-
+import type { Course } from "./useCourseStore";
+import type { Blog } from "./useBlogStore";
 
 interface ChatMessage {
   from: "user" | "bot";
