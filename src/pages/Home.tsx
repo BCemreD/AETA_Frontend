@@ -31,7 +31,6 @@ const HomePage: React.FC = () => {
 
         {/* Chatbox */}
         <div className="col-span-full lg:col-span-4  space-y-6">
-          <PromptBar onSubmit={handleSearch} />
           <Chatbox/>
         </div>
 

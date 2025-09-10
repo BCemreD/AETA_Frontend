@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SubmitButton from "./SubmitButton";
 
 interface Props {
   onSubmit: (query: string) => void;
@@ -23,9 +24,7 @@ const PromptBar: React.FC<Props> = ({ onSubmit }) => {
         className="flex-1 p-2 border rounded"
         onKeyDown={e => e.key === "Enter" && handleSubmit()}
       />
-      <button onClick={handleSubmit} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Gönder
-      </button>
+      <SubmitButton onClick={handleSubmit}/>
     </div>
   );
 };
