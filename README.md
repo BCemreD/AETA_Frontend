@@ -1,3 +1,47 @@
+This project is a 	complementary project of  [AETA](https://github.com/BCemreD/AETA). React application that fetches and displays data from a backend API. It is styled with Tailwind CSS and uses a state management library to handle application data.
+
+## Project Overview
+This frontend serves as the user interface for an educational advisory platform. It's designed to simulate an experience similar to the "Geleceği Yazanlar" blog by pulling data from a separate backend API. The application allows users to view courses and blog posts, and to interact with them, such as marking them as favorites.
+
+## Prerequisites
+The following software must be installed on your system to run the project successfully:
+
+- Node.js (LTS version): A JavaScript runtime environment.
+- npm or yarn: A package manager for installing project dependencies.
+- Git: A version control system to clone the project code.
+
+### Setup and Running
+#### 1. Install Dependencies
+Open your terminal in the project's root directory and install the required packages:
+```bash
+npm install
+```
+or
+```bash
+yarn install
+```
+#### 2. Run the Backend Server
+This frontend application is dependent on the backend API. Ensure the backend server is running and accessible at http://localhost:8080 before starting the frontend.
+
+#### 3. Start the Application
+Once the packages are installed and the backend is running, use the following command to start the application:
+
+```bash
+npm start
+```
+or
+```bash
+yarn start
+```
+The application will typically open automatically in your browser at http://localhost:3000.
+
+## Technologies Used
+- React: A JavaScript library for building the user interface.
+- React Router: For handling client-side routing and navigation.
+- Zustand: A lightweight state management library for managing application state.
+- Tailwind CSS: A utility-first CSS framework for rapid and responsive styling.
+- Axios: A promise-based HTTP client for making API requests to the backend.
+- 
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
