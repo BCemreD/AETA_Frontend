@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { useSearchStore } from "../../stores/useSearchStore"
 import PromptBar from "./PromptBar";
 import PrepPrompt from "./PrepPrompt";
+import ChatLog from "./ChatLog";
+
 
 const ChatBox: React.FC = () => {
-  const { chat, search } = useSearchStore();
 
+  const { search } = useSearchStore();
 
   const handleSearch = (
     query: string,
@@ -20,15 +22,7 @@ const ChatBox: React.FC = () => {
     <div className="flex flex-col h-[600px] p-4 border rounded">
 
       {/* Chat*/}
-      <div className="flex-1 overflow-y-auto mb-4">
-        {chat.map((msg, idx) => (
-          <div key={idx} className={`mb-2 ${msg.from === "user" ? "text-right" : "text-left"}`}>
-            <span className={msg.from === "user" ? "bg-blue-200 px-2 py-1 rounded" : "bg-gray-200 px-2 py-1 rounded"}>
-              {msg.text}
-            </span>
-          </div>
-        ))}
-      </div>
+      <ChatLog />
 
       {/* Prepared Prompts */}
       <div className="mb-2">

@@ -20,16 +20,16 @@ const CourseCart = ({ course }: CourseCartProps) => {
         <h2 className="text-lg font-semibold text-[#253342]">{course.title}</h2>
 
         {/* {user && <FavoriteButton course={course} />}⭐ */}
-        
+
       </div>
 
       <Link to={course.url} target="_blank" rel="noopener noreferrer">
 
         {/* Image */}
         <ImageHolder
-        src={getImageUrl(course.imageSrc)}
-        alt={course.imageAlt || "Course image"}
-      />
+          src={getImageUrl(course.imageSrc)}
+          alt={course.imageAlt || "Course image"}
+        />
 
 
         {/* Footer */}
@@ -52,13 +52,14 @@ const CourseCart = ({ course }: CourseCartProps) => {
             ))}
           </div>
         )}
+        
         {/*Categories */}
         {course.categories && course.categories.length > 0 && (
           <div className="flex flex-wrap gap-2">
             {course.categories.map((category) => (
               <span
-              key = {category}
-              className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
+                key={category}
+                className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
               >
                 #{category}
               </span>
