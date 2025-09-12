@@ -1,47 +1,48 @@
 import React from "react";
-import { useSearchStore } from "../../stores/useSearchStore";
-import PrepPrompt from "./PrePrompt";
-import type { PrepPromptProps } from "./PrePrompt";
+import { useSearchStore } from "../../stores/useSearchStore"
 import PromptBar from "./PromptBar";
+import PrepPrompt from "./PrepPrompt";
 
-interface ChatboxProps {}
-
-const Chatbox: React.FC<ChatboxProps> = () => {
+const ChatBox: React.FC = () => {
   const { chat, search } = useSearchStore();
 
- 
-  const handleTagSelect: PrepPromptProps["onTagSelect"] = (tagId) => {
-    search("", tagId ?? undefined);
-  };
 
-  const handleSendMessage = (message: string) => {
-    search(message);
+  const handleSearch = (
+    query: string,
+    tagIds?: number[],
+    categoryIds?: number[],
+    displayName?: string
+  ) => {
+    search(query, tagIds, categoryIds, displayName);
   };
 
   return (
-    <div className="border p-4 rounded-lg h-96 flex flex-col gap-2">
-      
-      {/* Tag selection */}
-      <PrepPrompt onTagSelect={handleTagSelect} />
+    <div className="flex flex-col h-[600px] p-4 border rounded">
 
-      {/* Messages */}
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2 mb-2">
+      {/* Chat*/}
+      <div className="flex-1 overflow-y-auto mb-4">
         {chat.map((msg, idx) => (
-          <div
-            key={idx}
-            className={`p-2 rounded ${
-              msg.from === "user" ? "bg-blue-100 self-end" : "bg-gray-200 self-start"
-            }`}
-          >
-            {msg.text}
+          <div key={idx} className={`mb-2 ${msg.from === "user" ? "text-right" : "text-left"}`}>
+            <span className={msg.from === "user" ? "bg-blue-200 px-2 py-1 rounded" : "bg-gray-200 px-2 py-1 rounded"}>
+              {msg.text}
+            </span>
           </div>
         ))}
       </div>
 
-      {/* Input */}
-      <PromptBar onSubmit={handleSendMessage} />
+      {/* Prepared Prompts */}
+      <div className="mb-2">
+        <PrepPrompt
+          onSelect={({ tagIds, categoryIds }, displayName) =>
+            handleSearch("", tagIds, categoryIds, displayName)
+          }
+        />
+      </div>
+
+      {/*Input Bar*/}
+      <PromptBar onSubmit={(query) => handleSearch(query)} />
     </div>
   );
 };
 
-export default Chatbox;
+export default ChatBox;

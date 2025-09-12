@@ -1,6 +1,6 @@
 import React from "react";
 import type { Blog } from "../stores/useBlogStore";
-import ImageHolder from "./ImageHolder";
+import ImageHolder from "./chatbox/ImageHolder";
 import { getImageUrl } from "../utils/utils";
 
 interface BlogCartProps {
@@ -16,7 +16,7 @@ const BlogCart = ({ blog }: BlogCartProps) => {
     >
       {/* Header */}
       <div className="flex justify-between items-start mb-2">
-        <h2 className="text-lg font-semibold text-gray-800">{blog.title}</h2>
+        <h2 className="text-lg font-semibold text-[#253342]">{blog.title}</h2>
       </div>
 
       {/* Image */}
@@ -38,7 +38,7 @@ const BlogCart = ({ blog }: BlogCartProps) => {
           {blog.tags.map((tag) => (
             <span
               key={tag}
-              className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+              className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
             >
               #{tag}
             </span>

@@ -1,4 +1,4 @@
-// src/components/FavoritesPage.tsx
+/* // src/components/FavoritesPage.tsx
 
 import React, { useEffect } from "react";
 import { Star } from "lucide-react";
@@ -74,4 +74,4 @@ const FavoritesPage: React.FC = () => {
   );
 };
 
-export default FavoritesPage;
+export default FavoritesPage; */

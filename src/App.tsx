@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import FavoritesPage from "./pages/FavoritesPage";
+//import FavoritesPage from "./pages/FavoritesPage";
 import HomePage from "./pages/Home";
 import LoginPage from "./components/user/LoginForm";
 import RegisterPage from "./components/user/RegisterForm";
@@ -15,7 +15,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/favorites" element={<FavoritesPage />} />
+       { /*<Route path="/favorites" element={<FavoritesPage />} />*/}
         <Route path="/jobs" />
         <Route path="/profile" element={<ProfilePage />} />
       </Routes>

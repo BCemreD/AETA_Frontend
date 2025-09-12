@@ -1,23 +1,21 @@
 import { create } from "zustand";
-import type { Course } from "./useCourseStore";
-import type { Blog } from "./useBlogStore";
-
-interface ChatMessage {
-  from: "user" | "bot";
-  text: string;
-}
 
 interface SearchState {
-  courses: Course[];
-  blogs: Blog[];
-  chat: ChatMessage[];
+  courses: any[];
+  blogs: any[];
+  chat: { from: "user" | "bot"; text: string }[];
   loading: boolean;
   error: string | null;
-  search: (query: string, tagId?: number) => Promise<void>;
+  search: (
+    query: string,
+    tagIds?: number[],
+    categoryIds?: number[],
+    preparedPromptText?: string
+  ) => Promise<void>;
   fetchDefault: () => Promise<void>;
 }
 
-export const useSearchStore = create<SearchState>((set) => ({
+export const useSearchStore = create<SearchState>((set, get) => ({
   courses: [],
   blogs: [],
   chat: [],
@@ -29,9 +27,11 @@ export const useSearchStore = create<SearchState>((set) => ({
     try {
       const [coursesRes, blogsRes] = await Promise.all([
         fetch("http://localhost:8080/api/courses"),
-        fetch("http://localhost:8080/api/blogs")
+        fetch("http://localhost:8080/api/blogs"),
       ]);
-      if (!coursesRes.ok || !blogsRes.ok) throw new Error("Failed to fetch default data");
+      if (!coursesRes.ok || !blogsRes.ok)
+        throw new Error("Failed to fetch default data");
+
       const courses = await coursesRes.json();
       const blogs = await blogsRes.json();
       set({ courses, blogs, loading: false });
@@ -40,24 +40,33 @@ export const useSearchStore = create<SearchState>((set) => ({
     }
   },
 
-  search: async (query, tagId) => {
-    set((state) => ({
-      chat: query ? [...state.chat, { from: "user", text: query }] : state.chat,
-      loading: true,
-      error: null,
-    }));
+  search: async (query, tagIds, categoryIds, preparedPromptText) => {
+    const isSearchAction =
+      query || (tagIds && tagIds.length > 0) || (categoryIds && categoryIds.length > 0);
+
+    if (!isSearchAction) return; // ignore null
+
+    set({ loading: true, error: null });
+
     try {
       const res = await fetch("http://localhost:8080/api/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query, tagId }),
+        body: JSON.stringify({ query, tagIds, categoryIds }),
       });
+
       if (!res.ok) throw new Error("Search failed");
-      const data = await res.json(); // { courses: [], blogs: [], botMessage: "" }
+
+      const data = await res.json();
+
       set((state) => ({
         courses: data.courses,
         blogs: data.blogs,
-        chat: query ? [...state.chat, { from: "bot", text: data.botMessage }] : state.chat,
+        chat: [
+          ...state.chat,
+          { from: "user", text: query || preparedPromptText || "" },
+          { from: "bot", text: data.botMessage ?? "Sonuç bulunamadı." },
+        ],
         loading: false,
       }));
     } catch (err: any) {

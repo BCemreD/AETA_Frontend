@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FavoriteButton } from "./favorite/FavoriteButton";
+//import { FavoriteButton } from "./favorite/FavoriteButton";
 import { useAuthStore } from "../stores/useAuthStore";
 import type { Course } from "../stores/useCourseStore";
-import ImageHolder from "./ImageHolder";
+import ImageHolder from "./chatbox/ImageHolder";
 import { getImageUrl } from "../utils/utils";
 
 interface CourseCartProps {
@@ -17,10 +17,10 @@ const CourseCart = ({ course }: CourseCartProps) => {
     <div className="rounded-2xl shadow-md p-4 mb-4 relative hover:shadow-lg transition">
       {/* Header */}
       <div className="flex justify-between items-start mb-2">
-        <h2 className="text-lg font-semibold text-gray-800">{course.title}</h2>
+        <h2 className="text-lg font-semibold text-[#253342]">{course.title}</h2>
 
-        {/* ⭐ */}
-        {user && <FavoriteButton course={course} />}
+        {/* {user && <FavoriteButton course={course} />}⭐ */}
+        
       </div>
 
       <Link to={course.url} target="_blank" rel="noopener noreferrer">
@@ -45,7 +45,7 @@ const CourseCart = ({ course }: CourseCartProps) => {
             {course.tags.map((tag) => (
               <span
                 key={tag}
-                className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+                className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
               >
                 #{tag}
               </span>

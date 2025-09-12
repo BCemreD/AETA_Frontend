@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import SubmitButton from "./SubmitButton";
 
-interface Props {
+interface PromptBarProps {
   onSubmit: (query: string) => void;
 }
 
-const PromptBar: React.FC<Props> = ({ onSubmit }) => {
+const PromptBar: React.FC<PromptBarProps> = ({ onSubmit }) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit = () => {
@@ -14,17 +13,25 @@ const PromptBar: React.FC<Props> = ({ onSubmit }) => {
     setQuery("");
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      handleSubmit();
+    }
+  };
+
   return (
-    <div className="flex gap-2 mb-4">
+    <div className="flex gap-2">
       <input
         type="text"
         value={query}
         onChange={e => setQuery(e.target.value)}
-        placeholder="Bir soru yazın..."
+        placeholder="Ne aradığınızı yazın..."
         className="flex-1 p-2 border rounded"
-        onKeyDown={e => e.key === "Enter" && handleSubmit()}
+        onKeyDown={handleKeyDown}
       />
-      <SubmitButton onClick={handleSubmit}/>
+      <button onClick={handleSubmit} className="bg-blue-600 text-white px-4 py-2 rounded">
+        Ara
+      </button>
     </div>
   );
 };
