@@ -72,5 +72,6 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     } catch (err: any) {
       set({ error: err.message, loading: false });
     }
+    console.log({ query, tagIds, categoryIds })
   },
 }));

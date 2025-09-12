@@ -11,9 +11,9 @@ const ChatBox: React.FC = () => {
     query: string,
     tagIds?: number[],
     categoryIds?: number[],
-    displayName?: string
+    preparedPromptText?: string
   ) => {
-    search(query, tagIds, categoryIds, displayName);
+    search(query, tagIds, categoryIds, preparedPromptText);
   };
 
   return (
@@ -33,8 +33,8 @@ const ChatBox: React.FC = () => {
       {/* Prepared Prompts */}
       <div className="mb-2">
         <PrepPrompt
-          onSelect={({ tagIds, categoryIds }, displayName) =>
-            handleSearch("", tagIds, categoryIds, displayName)
+          onSelect={({ tagIds, categoryIds }, preparedPromptText) =>
+            handleSearch("", tagIds, categoryIds, preparedPromptText)
           }
         />
       </div>

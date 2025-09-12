@@ -45,6 +45,20 @@ const BlogCart = ({ blog }: BlogCartProps) => {
           ))}
         </div>
       )}
+
+      {/* Categories */}
+      {blog.categories && blog.categories.length > 0 && (
+        <div className="flex flex-wrap gap-2">
+          {blog.categories.map((category) => (
+            <span
+              key={category}
+              className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
+            >
+              #{category}
+            </span>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
