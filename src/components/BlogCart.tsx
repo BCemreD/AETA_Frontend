@@ -2,6 +2,8 @@ import React from "react";
 import type { Blog } from "../stores/useBlogStore";
 import ImageHolder from "./chatbox/ImageHolder";
 import { getImageUrl } from "../utils/utils";
+import Tag from "./Tag";
+import Category from "./Category"
 
 interface BlogCartProps {
   blog: Blog;
@@ -32,33 +34,10 @@ const BlogCart = ({ blog }: BlogCartProps) => {
         )}
       </div>
 
-      {/* Tags */}
-      {blog.tags && blog.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {blog.tags.map((tag) => (
-            <span
-              key={tag}
-              className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
-            >
-              #{tag}
-            </span>
-          ))}
-        </div>
-      )}
+   {/*Tags & Categories */}
 
-      {/* Categories */}
-      {blog.categories && blog.categories.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {blog.categories.map((category) => (
-            <span
-              key={category}
-              className="text-xs bg-gray-200 text-[#253342] px-2 py-1 rounded-full"
-            >
-              #{category}
-            </span>
-          ))}
-        </div>
-      )}
+        {blog.tags && blog.tags.length > 0 && <Tag tags={blog.tags} />}
+        {blog.categories && blog.categories.length > 0 && <Category categories={blog.categories} />}
     </div>
   );
 };

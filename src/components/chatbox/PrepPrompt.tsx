@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 
+//prepared prompts to select tags and categories
+
 const PREPROMPT_DATA = {
   Backend: {
     tags: [{ name: "Java", id: 1 }, { name: "Spring Boot", id: 2 }],
@@ -34,49 +36,67 @@ const PrepPrompt: React.FC<PrepPromptProps> = ({ onSelect }) => {
 
   const handleMainCategoryClick = (category: MainCategory) => {
     setSelectedCategory(selectedCategory === category ? null : category);
+    setSelectedSubItem(null);
   };
+
+  const [selectedSubItem, setSelectedSubItem] = useState<{ type: "tag" | "category"; id: number; name: string } | null>(null);
+
 
   const handleSubItemClick = (
     type: "tag" | "category",
     id: number,
     name: string
   ) => {
-    if (type === "tag") {
-      onSelect({ tagIds: [id] }, name);
-    } else {
-      onSelect({ categoryIds: [id] }, name);
-    }
-  };
+      setSelectedSubItem({ type, id, name });
+      if (type === "tag") {
+        onSelect({ tagIds: [id] }, name);
+      } else {
+        onSelect({ categoryIds: [id] }, name);
+      }
+    };
 
-  return (
-    <div className="flex flex-col gap-2">
-      <div className="flex flex-wrap gap-2 mb-2">
-        {mainCategories.map((category) => (
-          <button
-            key={category}
-            className={`px-3 py-1 rounded-full text-sm font-medium ${selectedCategory === category ? "bg-blue-600 text-white" : "bg-gray-200 text-gray-700 hover:bg-gray-300"}`}
-            onClick={() => handleMainCategoryClick(category)}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
-      {selectedCategory && (
-        <div className="flex flex-wrap gap-2 mt-2 pt-2 border-t border-gray-200">
-          {PREPROMPT_DATA[selectedCategory].tags.map((tag) => (
-            <button key={tag.id} className="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 hover:bg-gray-200" onClick={() => handleSubItemClick("tag", tag.id, tag.name)}>
-              #{tag.name}
-            </button>
-          ))}
-          {PREPROMPT_DATA[selectedCategory].categories.map((category) => (
-            <button key={category.id} className="px-3 py-1 bg-gray-100 rounded-full text-xs text-gray-600 hover:bg-gray-200" onClick={() => handleSubItemClick("category", category.id, category.name)}>
-              #{category.name}
+    return (
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-wrap gap-2 mb-2">
+          {mainCategories.map((category) => (
+            <button
+              key={category}
+              className={`px-3 py-1 rounded-full text-sm font-medium ${selectedCategory === category ? "bg-[#034ea2] text-white" : "bg-white text-[#253342] hover:bg-gray-100"}`}
+              onClick={() => handleMainCategoryClick(category)}
+            >
+              {category}
             </button>
           ))}
         </div>
-      )}
-    </div>
-  );
-};
+        {selectedCategory && (
+          <div className="flex flex-wrap gap-2 mt-2 pt-2 border-t border-white">
+            {PREPROMPT_DATA[selectedCategory].tags.map((tag) => (
+              <button key={tag.id}
+                className={`px-3 py-1 rounded-full text-sm ${selectedSubItem?.type === "tag" && selectedSubItem.id === tag.id
+                  ? "bg-[#034ea2] text-white"
+                  : "bg-white text-[#253342] hover:bg-gray-100"
+                  }`}
+                onClick={() => handleSubItemClick("tag", tag.id, tag.name)}
+              >
+                #{tag.name}
+              </button>
+            ))}
+            {PREPROMPT_DATA[selectedCategory].categories.map((category) => (
+              <button key={category.id}
+                className={`px-3 py-1 rounded-full text-sm ${selectedSubItem?.type === "category" && selectedSubItem.id === category.id
+                  ? "bg-[#034ea2] text-white"
+                  : "bg-white text-[#253342] hover:bg-gray-100"
+                  }`}
+                onClick={() => handleSubItemClick("category", category.id, category.name)}
+              >
+                #{category.name}
+              </button>
+            ))}
+          </div>
+        )
+        }
+      </div >
+    );
+  };
 
-export default PrepPrompt;
+  export default PrepPrompt;

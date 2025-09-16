@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import SubmitButton from "./SubmitButton";
 
 interface PromptBarProps {
   onSubmit: (query: string) => void;
@@ -29,9 +30,7 @@ const PromptBar: React.FC<PromptBarProps> = ({ onSubmit }) => {
         className="flex-1 p-2 border rounded"
         onKeyDown={handleKeyDown}
       />
-      <button onClick={handleSubmit} className="bg-blue-600 text-white px-4 py-2 rounded">
-        Ara
-      </button>
+     <SubmitButton onClick={handleSubmit}/>
     </div>
   );
 };

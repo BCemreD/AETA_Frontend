@@ -33,7 +33,7 @@ export default function Navbar() {
           
           {/* left*/}
           <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342] focus:outline-2 focus:-outline-offset-1 focus:outline-[#034ea2]">
+            <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342] focus:outline-2 focus:-outline-offset-1 focus:outline-[#034ea2]">
               <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
               <XMarkIcon aria-hidden="true" className="hidden size-6 group-data-open:block" />
             </DisclosureButton>
@@ -43,7 +43,7 @@ export default function Navbar() {
             <div className="flex shrink-0 items-center">
               <img
                 alt="Logo"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
+                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=gray"
                 className="h-8 w-auto"
               />
             </div>
@@ -62,8 +62,8 @@ export default function Navbar() {
                       className={classNames(
                         isActive
                           ? "bg-[#ffc40c] text-[#253342]"
-                          : "text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342]",
-                        "rounded-md px-3 py-2 text-sm font-medium text-center"
+                          : "text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342]",
+                        "rounded-md px-3 py-2 text-[16px] font-medium text-center"
                       )}
                     >
                       {item.name}
@@ -76,8 +76,8 @@ export default function Navbar() {
                       className={classNames(
                         isActive
                           ? "bg-[#ffc40c] text-[#253342]"
-                          : "text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342]",
-                        "rounded-md px-3 py-2 text-sm font-medium text-center"
+                          : "text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342]",
+                        "rounded-md px-3 py-2 text-[16px] font-medium text-center"
                       )}
                     >
                       {item.name}
@@ -94,7 +94,7 @@ export default function Navbar() {
               <>
                 {/* Profil menüsü */}
                 <Menu as="div" className="relative ml-3">
-                  <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+                  <MenuButton className="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#034ea2]">
                     <img
                       alt="Profile"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e"
@@ -136,13 +136,13 @@ export default function Navbar() {
               <div className="flex gap-2">
                 <Link
                   to="/login"
-                  className="text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342] rounded-md px-3 py-2 text-sm font-medium text-center"
+                  className="text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342] rounded-md px-3 py-2 text-[16px] font-medium text-center"
                 >
                   Giriş Yap
                 </Link>
                 <Link
                   to="/register"
-                  className="bg-[#ffc40c] text-[#253342] rounded-md px-3 py-2 text-sm font-medium hover:bg-[#ffc40c] text-center"
+                  className=" text-[#253342] rounded-md px-3 py-2 text-[16px] font-medium hover:bg-[#ffc40c]/50 text-center"
                 >
                   Kayıt Ol
                 </Link>
@@ -169,7 +169,7 @@ export default function Navbar() {
                 className={classNames(
                   isActive
                     ? "bg-[#ffc40c] text-[#253342]"
-                    : "text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342]",
+                    : "text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342]",
                   "block rounded-md px-3 py-2 text-base font-medium text-center" // mobile
                 )}
               >
@@ -184,7 +184,7 @@ export default function Navbar() {
                 className={classNames(
                   isActive
                     ? "bg-[#ffc40c] text-[#253342]"
-                    : "text-[#253342] hover:bg-[#ffc40c] hover:text-[#253342]",
+                    : "text-[#253342] hover:bg-[#ffc40c]/50 hover:text-[#253342]",
                   "block rounded-md px-3 py-2 text-base font-medium text-center" // mobile
                 )}
               >

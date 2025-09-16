@@ -19,7 +19,7 @@ const ChatBox: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col h-[600px] p-4 border rounded">
+    <div className="flex flex-col h-[600px] p-4 border rounded border-gray-100 shadow-2xl">
 
       {/* Chat*/}
       <ChatLog />
