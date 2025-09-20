@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuthStore } from "../../stores/useAuthStore";
 import { useNavigate } from "react-router-dom";
+import { API_BASE_URL } from "../../utils/config";
 
 const LoginForm = () => {
   const { login } = useAuthStore();
@@ -13,7 +14,7 @@ const LoginForm = () => {
     e.preventDefault();
     setError("");
     try {
-      const res = await fetch("http://localhost:8080/api/auth/login", {
+      const res = await fetch(`${API_BASE_URL}/api/auth/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password }),
@@ -25,7 +26,7 @@ const LoginForm = () => {
       }
 
       const data = await res.json();
-      login(data.token);
+      login(data.user, data.token);
       navigate("/"); // re-direct home
     } catch (err) {
       setError((err as Error).message);

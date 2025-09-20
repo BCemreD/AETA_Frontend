@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { API_BASE_URL } from "../utils/config";
 
 export interface Course {
   id: number;
@@ -25,7 +26,7 @@ export const useCourseStore = create<CourseState>((set) => ({
   fetchCourses: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch("http://localhost:8080/api/courses");
+      const response = await fetch(`${API_BASE_URL}/api/courses`);
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
       }

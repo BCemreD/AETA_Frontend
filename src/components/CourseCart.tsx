@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 //import { FavoriteButton } from "./favorite/FavoriteButton";
-import { useAuthStore } from "../stores/useAuthStore";
+//import { useAuthStore } from "../stores/useAuthStore";
 import type { Course } from "../stores/useCourseStore";
 import ImageHolder from "./chatbox/ImageHolder";
 import { getImageUrl } from "../utils/utils";
@@ -13,7 +13,7 @@ interface CourseCartProps {
 }
 
 const CourseCart = ({ course }: CourseCartProps) => {
-  const { user } = useAuthStore(); // user info
+  //const { user } = useAuthStore(); // user info
 
   return (
     <div className="rounded-2xl shadow-md p-4 mb-4 relative hover:shadow-lg transition">

@@ -1,4 +1,4 @@
-import { create } from "zustand";
+/* import { create } from "zustand";
 import { useAuthStore } from "./useAuthStore";
 import type { Course } from "./useCourseStore";
 
@@ -91,3 +91,4 @@ export const useFavoriteStore = create<FavoriteState>((set, get) => ({
     }
   },
 }));
+ */

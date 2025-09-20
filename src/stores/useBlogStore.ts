@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { API_BASE_URL } from "../utils/config";
 
 export interface Blog {
   id: number;
@@ -26,7 +27,7 @@ export const useBlogStore = create<BlogState>((set) => ({
   fetchBlogs: async () => {
     set({ loading: true, error: null });
     try {
-      const response = await fetch("http://localhost:8080/api/blogs");
+      const response = await fetch(`${API_BASE_URL}/api/blogs`);
       if (!response.ok) {
         throw new Error("Failed to fetch blogs");
       }

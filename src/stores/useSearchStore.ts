@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { API_BASE_URL } from "../utils/config";
 
 interface SearchState {
   courses: any[];
@@ -15,7 +16,7 @@ interface SearchState {
   fetchDefault: () => Promise<void>;
 }
 
-export const useSearchStore = create<SearchState>((set, get) => ({
+export const useSearchStore = create<SearchState>((set) => ({
   courses: [],
   blogs: [],
   chat: [],
@@ -26,8 +27,8 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     set({ loading: true, error: null });
     try {
       const [coursesRes, blogsRes] = await Promise.all([
-        fetch("http://localhost:8080/api/courses"),
-        fetch("http://localhost:8080/api/blogs"),
+        fetch(`${API_BASE_URL}/api/courses`),
+        fetch(`${API_BASE_URL}/api/blogs`),
       ]);
       if (!coursesRes.ok || !blogsRes.ok)
         throw new Error("Failed to fetch default data");
@@ -49,7 +50,7 @@ export const useSearchStore = create<SearchState>((set, get) => ({
     set({ loading: true, error: null });
 
     try {
-      const res = await fetch("http://localhost:8080/api/search", {
+      const res = await fetch(`${API_BASE_URL}/api/search`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query, tagIds, categoryIds }),

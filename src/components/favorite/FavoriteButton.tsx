@@ -1,6 +1,6 @@
-import React from "react";
+/* import React from "react";
 import { useAuthStore } from "../../stores/useAuthStore";
-import { useFavoriteStore } from "../../stores/useFavoriteStore";
+//import { useFavoriteStore } from "../../stores/useFavoriteStore";
 import type { Course } from "../../stores/useCourseStore";
 
 interface FavoriteButtonProps {
@@ -9,7 +9,7 @@ interface FavoriteButtonProps {
 
 export const FavoriteButton = ({ course }: FavoriteButtonProps) => {
   const { user, token } = useAuthStore();
-  const { favorites, toggleFavorite } = useFavoriteStore();
+  //const { favorites, toggleFavorite } = useFavoriteStore();
 
   if (!user || !token) {
     return null; 
@@ -39,3 +39,4 @@ export const FavoriteButton = ({ course }: FavoriteButtonProps) => {
     </button>
   );
 };
+ */
