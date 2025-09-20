@@ -1,4 +1,3 @@
-import React from "react";
 import type { Blog } from "../stores/useBlogStore";
 import ImageHolder from "./chatbox/ImageHolder";
 import { getImageUrl } from "../utils/utils";

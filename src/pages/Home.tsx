@@ -1,5 +1,5 @@
 // HomePage.tsx
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useSearchStore } from "../stores/useSearchStore";
 import CourseCart from "../components/CourseCart";
 import BlogCart from "../components/BlogCart";

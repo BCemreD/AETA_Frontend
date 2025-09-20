@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 //import { FavoriteButton } from "./favorite/FavoriteButton";
 //import { useAuthStore } from "../stores/useAuthStore";
