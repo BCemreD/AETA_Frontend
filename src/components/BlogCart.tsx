@@ -1,5 +1,5 @@
 import type { Blog } from "../stores/useBlogStore";
-import ImageHolder from "./chatbox/ImageHolder";
+import ImageHolder from "./ImageHolder";
 import { getImageUrl } from "../utils/utils";
 import Tag from "./Tag";
 import Category from "./Category"
@@ -12,7 +12,7 @@ interface BlogCartProps {
 const BlogCart = ({ blog }: BlogCartProps) => {
   return (
     <div
-      className="rounded-2xl shadow-md p-4 mb-4 cursor-pointer hover:shadow-lg transition"
+      className="rounded-2xl shadow-md w-[350px] p-4 mb-4 cursor-pointer hover:shadow-lg transition"
       onClick={() => window.open(blog.url, "_blank")}
     >
       {/* Header */}

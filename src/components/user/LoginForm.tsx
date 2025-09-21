@@ -46,7 +46,7 @@ const LoginForm = () => {
         placeholder="Kullanıcı Adı"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-[#ffc40c] transition duration-200"
+        className="w-full px-3 py-2 border rounded-lg focus:outline-none  transition duration-200"
       />
 
       <input
@@ -54,12 +54,12 @@ const LoginForm = () => {
         placeholder="Şifre"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:ring-[#ffc40c] transition duration-200"
+        className="w-full px-3 py-2 border rounded-lg focus:outline-none transition duration-200"
       />
 
       <button
         type="submit"
-        className="w-full py-2 bg-[#ffc40c] text-[#253342] font-bold rounded-lg hover:bg-[#ffbe00] transition duration-200"
+        className="w-full py-2 bg-[#ffc40c] text-[#253342] font-bold rounded-lg hover:bg-[#ffbe00]/70 transition duration-200"
       >
         Giriş Yap
       </button>

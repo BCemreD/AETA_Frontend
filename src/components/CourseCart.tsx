@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 //import { FavoriteButton } from "./favorite/FavoriteButton";
 //import { useAuthStore } from "../stores/useAuthStore";
 import type { Course } from "../stores/useCourseStore";
-import ImageHolder from "./chatbox/ImageHolder";
+import ImageHolder from "./ImageHolder";
 import { getImageUrl } from "../utils/utils";
 import Tag from "./Tag";
 import Category from "./Category"
@@ -15,7 +15,7 @@ const CourseCart = ({ course }: CourseCartProps) => {
   //const { user } = useAuthStore(); // user info
 
   return (
-    <div className="rounded-2xl shadow-md p-4 mb-4 relative hover:shadow-lg transition">
+    <div className="rounded-2xl w-[350px] shadow-md p-4 mb-4 relative hover:shadow-lg transition">
       {/* Header */}
       <div className="flex justify-between items-start mb-2">
         <h2 className="text-lg font-semibold text-[#253342]">{course.title}</h2>
