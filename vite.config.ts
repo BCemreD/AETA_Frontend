@@ -17,4 +17,15 @@ export default defineConfig({
       },
     },
   },
+
+    preview: {
+    // To handle Railway host blockage
+    allowedHosts: [
+      'aetafrontend-production.up.railway.app', 
+      '*' //temporarily 
+    ],
+    // Railway port
+    port: process.env.PORT ? Number(process.env.PORT): 4173, 
+    host: '0.0.0.0'
+  }
 })
